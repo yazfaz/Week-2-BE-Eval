@@ -38,17 +38,74 @@ module Tennis
     # 
     # Returns advantage if both players have at least 3 points, but player has
     def score
-      return 'love' if @points == 0
-      return 'fifteen' if @points == 1
-      return 'thirty' if @points == 2
-      
-      return 'deuce' if @points == 3 && @opponent.points==3
-    
-      return 'advantage' if (@points >= 3 && @opponent.points >= 3) && @points == (@opponent.points + 1)
-      return 'win' if @points >= 3 && @points == (@opponent.points + 2)
-      
-      return 'forty' if @points == 3 
+      return love_score if love?
+      return fifteen_score if fifteen?
+      return thirty_score if thirty?
+      return deuce_score if deuce?
+      return advantage_score if advantage?
+      return win_score if win?
+      return forty_score if forty?
       
     end
+
+     private 
+      
+      def love?
+         @points == 0
+      end 
+
+      def love_score
+        return 'love'
+      end
+
+      def fifteen?
+        @points == 1
+      end
+
+      def fifteen_score
+        return 'fifteen'
+      end
+
+      def thirty?
+        @points == 2
+      end
+
+      def thirty_score
+        return 'thirty'
+      end
+
+
+      def deuce?
+        @points == 3 && @opponent.points == 3
+      end
+
+      def deuce_score
+        return 'deuce'
+      end
+
+      def advantage?
+        (@points >= 3 && @opponent.points >= 3) && @points == (@opponent.points + 1)
+      end
+
+      def advantage_score
+        return 'advantage'
+      end
+
+      def win?
+        @points >= 3 && @points == (@opponent.points + 2)
+      end
+
+      def win_score
+        return 'win'
+      end
+
+      def forty?
+        @points == 3 
+      end
+
+      def forty_score
+        return 'forty'
+      end
+
   end
 end
